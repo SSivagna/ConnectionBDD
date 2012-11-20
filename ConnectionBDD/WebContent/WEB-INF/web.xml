@@ -12,6 +12,6 @@
 
 	<servlet-mapping>
 		<servlet-name>GestionTestJDBC</servlet-name>
-		<url-pattern>/testjdbc</url-pattern>
+		<url-pattern>/testjdbc1</url-pattern>
 	</servlet-mapping>
 </web-app>
