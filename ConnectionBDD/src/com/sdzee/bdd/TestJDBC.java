@@ -11,15 +11,18 @@ public class TestJDBC
     /* La liste qui contiendra tous les résultats de nos essais */
     private List<String> messages = new ArrayList<String>();
 
-    public List<String> executerTests( HttpServletRequest request ) {
+    public List<String> executerTests( HttpServletRequest request ) 
+    {
         /* Chargement du driver JDBC pour MySQL */
-        try {
+        try
+        {
             messages.add( "Chargement du driver..." );
             Class.forName( "com.mysql.jdbc.Driver" );
             messages.add( "Driver chargé !" );
-        } catch ( ClassNotFoundException e ) {
-            messages.add( "Erreur lors du chargement : le driver n'a pas été trouvé dans le classpath ! <br/>"
-                    + e.getMessage() );
+        } 
+        catch ( ClassNotFoundException e ) 
+        {
+            messages.add( "Erreur lors du chargement : le driver n'a pas été trouvé dans le classpath ! <br/>" + e.getMessage() );
         }
 
         /* Connexion à la base de données */
@@ -29,7 +32,8 @@ public class TestJDBC
         Connection connexion = null;
         Statement statement = null;
         ResultSet resultat = null;
-        try {
+        try 
+        {
             messages.add( "Connexion à la base de données..." );
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
             messages.add( "Connexion réussie !" );
@@ -78,6 +82,7 @@ public class TestJDBC
                 } catch ( SQLException ignore ) {
                 }
             }
+            System.out.println("NB de TestJDBC");
         }
 
         return messages;
