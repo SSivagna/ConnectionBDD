@@ -47,44 +47,58 @@ public class TestJDBC
             messages.add( "Requête \"SELECT id, email, password, name FROM user;\" effectuée !" );
      
             /* Récupération des données du résultat de la requête de lecture */
-            while ( resultat.next() ) {
+            while ( resultat.next() ) 
+            {
                 int idUtilisateur = resultat.getInt( "id" );
                 String emailUtilisateur = resultat.getString( "email" );
                 String motDePasseUtilisateur = resultat.getString( "password" );
                 String nomUtilisateur = resultat.getString( "name" );
                 /* Formatage des données pour affichage dans la JSP finale. */
                 messages.add( "Données retournées par la requête : id = " + idUtilisateur + ", email = " + emailUtilisateur
-                        + ", password = "
-                        + motDePasseUtilisateur + ", name = " + nomUtilisateur + "." );
+                        + ", password = " + motDePasseUtilisateur + ", name = " + nomUtilisateur + "." );
             }
-        } catch ( SQLException e ) {
-            messages.add( "Erreur lors de la connexion : <br/>"
-                    + e.getMessage() );
-        } finally {
+        } 
+        catch ( SQLException e ) 
+        {
+            messages.add( "Erreur lors de la connexion : <br/>" + e.getMessage() );
+        } 
+        finally
+        {
             messages.add( "Fermeture de l'objet ResultSet." );
-            if ( resultat != null ) {
-                try {
+            if ( resultat != null ) 
+            {
+                try 
+                {
                     resultat.close();
-                } catch ( SQLException ignore ) {
+                } 
+                catch ( SQLException ignore ) 
+                {
                 }
             }
             messages.add( "Fermeture de l'objet Statement." );
-            if ( statement != null ) {
-                try {
+            if ( statement != null ) 
+            {
+                try 
+                {
                     statement.close();
-                } catch ( SQLException ignore ) {
+                } 
+                catch ( SQLException ignore ) 
+                {
                 }
             }
             messages.add( "Fermeture de l'objet Connection." );
-            if ( connexion != null ) {
-                try {
+            if ( connexion != null ) 
+            {
+                try 
+                {
                     connexion.close();
-                } catch ( SQLException ignore ) {
+                } 
+                catch ( SQLException ignore ) 
+                {
                 }
             }
-            System.out.println("NB de TestJDBC");
+            System.out.println("Exécution de TestJDBC");
         }
-
         return messages;
     }
 }
