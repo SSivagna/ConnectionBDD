@@ -18,7 +18,7 @@ public class TestJDBC
         {
             messages.add( "Chargement du driver..." );
             Class.forName( "com.mysql.jdbc.Driver" );
-            messages.add( "Driver chargé !" );
+            messages.add( "Driver chargé mais pas engagé!" );
         } 
         catch ( ClassNotFoundException e ) 
         {
@@ -32,6 +32,7 @@ public class TestJDBC
         Connection connexion = null;
         Statement statement = null;
         ResultSet resultat = null;
+    
         try 
         {
             messages.add( "Connexion à la base de données..." );
@@ -45,7 +46,7 @@ public class TestJDBC
             /* Exécution d'une requête de lecture */
             resultat = statement.executeQuery( "SELECT id, email, password, name FROM user;" );
             messages.add( "Requête \"SELECT id, email, password, name FROM user;\" effectuée !" );
-     
+            
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) 
             {
@@ -57,6 +58,23 @@ public class TestJDBC
                 messages.add( "Données retournées par la requête : id = " + idUtilisateur + ", email = " + emailUtilisateur
                         + ", password = " + motDePasseUtilisateur + ", name = " + nomUtilisateur + "." );
             }
+          
+         /*   Exécution d'une requête d'écriture */
+         int   statut = statement.executeUpdate("INSERT into bdd.user (id, email, password, name, date_inscription) values ('5','sivagnanasunda@gmail.fr', 'medecine14', 'Sinthuja14', '2012-11-26 11:05:25');");
+    		messages.add("Requête \"INSERT");
+    		
+    		 resultat = statement.executeQuery("SELECT id, email, password, name, date_inscription from user where id='5'");
+    		
+    		while (resultat.next())
+    		{
+    			int idUser = resultat.getInt("id");
+    			String emailUtilisateur = resultat.getString( "email" );
+                String motDePasseUtilisateur = resultat.getString( "password" );
+                String nomUtilisateur = resultat.getString( "name" );
+                Date dateInscription = resultat.getDate("date_inscription");
+                /*Formatage des données*/
+                messages.add("Données retournées par la requête : id = " + idUser + ", email = " + emailUtilisateur + ", password = " + motDePasseUtilisateur + ", name = "+ nomUtilisateur + ", date_inscription = " + dateInscription + ".");
+    		}
         } 
         catch ( SQLException e ) 
         {
